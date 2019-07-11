@@ -12,8 +12,34 @@
     /* We need to add space to the top of the body otherwise the nav will overlap the Jumbotron */
     body {
       margin-top: 50px;
+      font-family: 'Roboto', sans-serif;
+      font-family: 'Merriweather', serif;
     }
-    
+    .button {
+  width: 140px;
+  height: 45px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #008080;
+  background-color: #FEF5E7;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+.button:hover {
+  background-color: #2EE59D;
+  background-color: #008080;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  /*transform: translateY(-7px);*/
+}
   </style>
 </head>
 <body>
@@ -39,7 +65,7 @@
 </nav>
 
 <div class="container">
-<div class="jumbotron text-center bg-primary" style="margin-bottom:0; color: white">
+<div class="jumbotron text-center bg-primary shadow-lg" style="margin-bottom:0; color: white">
   <h1>Tommy Train Time!</h1>
   <p>Chugga Chugga Chugga Chugga Choo Choo!</p> 
 </div>
@@ -49,7 +75,7 @@
   <div class="row">
     <div class="col-md-12">
       <!-- Current Train Schedule-->
-        <div class="card mb-4 border-primary">
+        <div class="card mb-4 border-primary shadow-lg">
           <div class="card-header bg-primary text-white">Current Train Schedule</div>
           <div class="card-body">
             <table class="table table-sm table-hover" id='employee-table'>
@@ -73,7 +99,7 @@
     <div class="row">
       <div class="col-md-12">
         <!-- Add train  -->
-        <div class="card mb-4 border-primary">
+        <div class="card mb-4 border-primary shadow-lg">
           <div class="card-header bg-primary text-white">Add Train</div>
           <div class="card-body">
 
@@ -95,7 +121,7 @@
                 <label for="rate-input">Frequency (min)</label>
                 <input class="form-control" id="rate-input" placeholder="120" type="text">
               </div>
-              <button class="btn btn-primary float-left" id="add-employee-btn">Submit</button>
+              <button class="btn button float-left" id="add-employee-btn">Submit</button>
             </form>
           </div>
         </div>
