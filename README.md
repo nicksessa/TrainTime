@@ -2,7 +2,7 @@
 
 [![Sessa Logo](https://drive.google.com/open?id=1a5Ckf1F-7hIxh5wWQeqhI7GBwBd1pD6J)](https://github.com/nicksessa)
 
-[![Build Status](https://github.com/nicksessa)](https://github.com/nicksessa)
+[![Build Status](https://travis-ci.org/nicksessa/TrainTime.svg?branch=master)](https://travis-ci.org/nicksessa/TrainTime)
 
 Train Schedule Viewer
 
