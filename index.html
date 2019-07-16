@@ -21,15 +21,42 @@
   <!-- Moment.js Reference -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
   
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>   -->
+<script src="jquery.fittext.js"></script>
+
+
   
   <style>
-    /* We need to add space to the top of the body otherwise the nav will overlap the Jumbotron */
-    body {
-      margin-top: 50px;
-      font-family: 'Roboto', sans-serif;
-     font-family: 'Merriweather', serif;
-     color: #34495E;
+  
+
+
+.clock {
+  height: 100px;
+  width: 70%;
+  line-height: 100px;  
+  margin: 50px auto 0;
+  padding: 0 50px;
+  background: #222;
+  color: #eee;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0 0 7px #222;
+  text-shadow: 0 0 3px #fff;
 }
+  
+  
+  
+  
+  /* We need to add space to the top of the body otherwise the nav will overlap the Jumbotron */
+  body {
+    user-select: none;
+    user-drag: none;
+    margin-top: 50px;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Merriweather', serif;
+    color: #34495E;
+}
+
  th {
      color: #34495E;
 }
@@ -89,6 +116,7 @@
 <div class="jumbotron text-center shadow-lg" style="margin-bottom:0; background-color: #34495E; color: white">
   <h1>Tommy Train Time!</h1>
   <p>Chugga Chugga Chugga Chugga Choo Choo!</p> 
+  <p id="clock" class="clock">loading ...</p>
 </div>
 </div>
 
@@ -155,6 +183,19 @@
 </div>
 
 <script>
+
+
+$('#clock').fitText(1.3);
+
+function update() {
+  $('#clock').html(moment().format('MMMM, D YYYY H:mm:ss'));
+}
+
+setInterval(update, 1000);
+
+
+
+
   // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyB10qzJH7780iz0m3Xelhg3noX_ePVt718",
@@ -244,28 +285,46 @@ database.ref().on("child_added", function(childSnapshot) {
 
   var nextArrival = 0
   var minutesAway = 0
-  var now = moment(new Date())
+  var now = moment();
   console.log("now: " + now)
+
+  var s = moment.unix(trainStartTime).format("LLL")
+  console.log("s: " + s)
+
   console.log("train start time: " + trainStartTime)
+  
+  
+  //format now (current time)
+  nowHHMMSS = moment(now).format("LTS")
+  console.log("now hhmmss: " + nowHHMMSS)
+  
   
   if (trainStartTime < now) {
     //  var dueDate = moment().add(15,'days').format('DD-MM-YYYY')// to add 15 days 
-    nextArrival = trainStartTime + moment().add(1, 'd')
+
+    nextArrival = moment(trainStartTime, 'MM/DD/YYYY').add(1, 'd')
+    
     console.log("next arrival (tomorrow): " + nextArrival)
     
     minutesAway = moment.duration(now.diff(nextArrival));
+    nextArrival = moment(nextArrival, 'LT')
+    
     
     console.log("minutes away: " + minutesAway)
+    console.log("nextArrival: " + nextArrival)
     
     //moment.duration().asMinutes()
     //var duration = moment.duration(now.diff(end));
     //var days = duration.asDays();
     
-    minutesAway = minutesAway.asMinutes()
-    console.log("minutes away: " + minutesAway)
+    minutesAway = moment(minutesAway, 'm')
+    console.log("minutes away as min: " + minutesAway)
   } else {
-    nextArrival = trainStartTime.asHours()
+    nextArrival = moment(trainStartTime, 'LT')
     minutesAway = moment.duration(now.diff(nextArrival));
+    minutesAway = moment(minutesAway, 'm')
+    console.log("minutes away: " + minutesAway)
+    console.log("nextArrival: " + nextArrival)
   }
 
 
@@ -290,6 +349,9 @@ database.ref().on("child_added", function(childSnapshot) {
   // Append the new row to the table
   $("#train-table > tbody").append(newRow);
 });
+
+
+
 
 
 
