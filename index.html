@@ -276,7 +276,7 @@ database.ref().on("child_added", function(childSnapshot) {
   var trainStartTimeMMDDYYYY = moment.unix(trainStartTime).format("MM/DD/YYYY");
 
 
-  var nextArrival = 0
+  var nextArrival = trainStartTime
   var minutesAway = 0
 
 
@@ -288,39 +288,49 @@ console.log("right now --> " + now.format());
 
 console.log("\nLocalized")
 console.log(now.format("LT"));
-console.log(now.format("LTS"));
-console.log(now.format("LTS"));
-console.log(now.format("L"));
-console.log(now.format("l"));
+//console.log(now.format("LTS"));
+//console.log(now.format("LTS"));
+//console.log(now.format("L"));
+//console.log(now.format("l"));
 
 
 
 
-  console.log("train start time: " + trainStartTime)
+  //console.log("train start time: " + trainStartTime)
   
   //format now (current time)
-  nowHHMMSS = moment.unix(now).format("HH:MM:SS")
-  console.log("Unix now hhmmss: " + nowHHMMSS)
+  //nowHHMMSS = moment.unix(now).format("HH:MM:SS")
+  //console.log("Unix now hhmmss: " + nowHHMMSS)
   
   
 
-var startTime = moment('16:30', 'HH:mm')
-console.log("<<< start time >>> " + startTime.format('HH:mm:ss'))
+//var startTime = moment('16:30', 'HH:mm')
+//console.log("start time --> " + startTime.format('HH:mm:ss'))
+
+trainStartTime = moment(trainStartTime, 'HH:mm')
+console.log("start time --> " + trainStartTime.format('HH:mm:ss'))
+
+
+//var t1 = moment(startTime);
+var t1 = moment(trainStartTime)
+var t2 = moment();                 // this is now
+
+var minutesAway = t1.diff(t2, 'minutes')
+
+console.log("min away --> " + minutesAway)
 
 
 
   var t = trainStartTime
-  while ( t < now ) {
+  while ( t < moment()) {
     t = trainStartTime + trainFrequency
   }
   nextArrival = t
+
+  nextArrival = moment(nextArrival, 'HH:mm').format("HH:mm")
   
-  console.log("next arrival: " + nextArrival)
+  console.log("next arrival: " + moment(nextArrival, 'HH:mm'))
   
-
-
-
-
 
 
 
