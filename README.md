@@ -1,4 +1,9 @@
 # TrainTime
+
+[![Sessa Logo](https://drive.google.com/open?id=1a5Ckf1F-7hIxh5wWQeqhI7GBwBd1pD6J)](https://github.com/nicksessa)
+
+[![Build Status](https://github.com/nicksessa)](https://github.com/nicksessa)
+
 Train Schedule Viewer
 
 This project incorporated a hook into Firebase to store data so that other users can see the train schedule.
